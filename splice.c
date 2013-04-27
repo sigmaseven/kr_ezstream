@@ -28,7 +28,7 @@ void splice(kr_mkv_t *input, kr_mkv_t *output)
 
 	buffer = (uint8_t *)malloc(10000000);
 
-	while((bytes_read = kr_mkv_read_packet(output, &track, &timecode, &flags, buffer)) > 0)
+	while((bytes_read = kr_mkv_read_packet(input, &track, &timecode, &flags, buffer)) > 0)
 	{
 		if(flags == 0x80)
 		{
