@@ -4,6 +4,7 @@
 #include <krad_mkv_demux.h>
 
 #include "playlist.h"
+#include "splice.h"
 
 int main()
 {
@@ -21,7 +22,8 @@ int main()
 		perror("splice_init");
 	}
 
-	printf("resolution: %d x %d\n", mkv_output->tracks[1].width, mkv_output->tracks[1].height);
+	printf("resolution: %d x %d\n", mkv_output->tracks[VIDEO_TRACK].width,
+					mkv_output->tracks[VIDEO_TRACK].height);
 
 	uint32_t i;
 

@@ -1,3 +1,6 @@
+#ifndef PLAYLIST_H
+#define PLAYLIST_H
+
 #include <limits.h>
 #include <stdint.h>
 
@@ -19,3 +22,5 @@ uint32_t playlist_count(playlist_t *playlist);
 void playlist_sanitize_entry(char *filename);
 void playlist_next(playlist_t *playlist);
 char *playlist_current_video(playlist_t *playlist);
+
+#endif

@@ -30,7 +30,7 @@ void splice(kr_mkv_t *input, kr_mkv_t *output)
 
 	while((bytes_read = kr_mkv_read_packet(input, &track, &timecode, &flags, buffer)) > 0)
 	{
-		if(flags == 0x80)
+		if(flags == FLAGS_KEYFRAME)
 		{
 			keyframe = 1;
 		}
