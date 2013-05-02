@@ -2,8 +2,8 @@ clean:
 	rm *.o
 
 all:
-	gcc -c playlist.c
-	gcc -c splice.c `perl includes.pl` -DKR_LINUX
-	gcc -c main.c `perl includes.pl` -DKR_LINUX
+	gcc -c src/playlist.c
+	gcc -c src/splice.c `perl includes.pl` -DKR_LINUX
+	gcc -c src/main.c `perl includes.pl` -DKR_LINUX
 
-	gcc -o kr_ezstream *.o -lkrad_mkv
+	gcc -o kr_ezstream *.o -lkrad_mkv -lrt

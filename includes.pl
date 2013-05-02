@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w 
 
-my @dirs = </home/sigma/kradradio/lib/*>;
+my @dirs = </home/sigma/krad_radio/lib/*>;
 
 foreach(@dirs)
 {

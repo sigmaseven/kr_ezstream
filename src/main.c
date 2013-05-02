@@ -15,7 +15,8 @@ int main()
 	krad_system_init();
 //	krad_system_log_on("derp.log");
 	playlist_t *playlist = playlist_init("test.txt");
-	mkv_output = kr_mkv_create_file("output.webm");
+
+	mkv_output = kr_mkv_create_stream(argv[1], atoi(argv[2]), argv[3], argv[4]);
 
 	if(splice_init(settings, mkv_output, playlist) < 0)
 	{
@@ -26,22 +27,29 @@ int main()
 					mkv_output->tracks[VIDEO_TRACK].height);
 
 	uint32_t i;
-
-	for(i = 0; i < playlist_count(playlist); i++)
+	while(1)
 	{
-		printf("playing: %s\n", playlist_current_video(playlist));
-		mkv_input = kr_mkv_open_file(playlist_current_video(playlist));
-
-		if(!mkv_input)
+		playlist->current_entry = 0;
+		for(i = 0; i < playlist_count(playlist); i++)
 		{
-			perror(playlist_current_video(playlist));
+			if(playlist_current_video(playlist) > 0)
+			{
+				printf("playing: %s\n", playlist_current_video(playlist));
+				mkv_input = kr_mkv_open_file(playlist_current_video(playlist));
+
+				if(!mkv_input)
+				{
+					perror(playlist_current_video(playlist));
+				}
+
+				splice(mkv_input, mkv_output);
+
+				kr_mkv_destroy(&mkv_input);
+				playlist_next(playlist);
+			}
 		}
-
-		splice(mkv_input, mkv_output);
-
-		kr_mkv_destroy(&mkv_input);
-		playlist_next(playlist);
 	}
+
 	kr_mkv_destroy(&mkv_output);
 	playlist_destroy(playlist);
 
